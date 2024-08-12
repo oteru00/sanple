@@ -1,0 +1,1003 @@
+@charset "UTF-8";
+/* サイト共通 */
+body{
+
+    line-height: 30px;
+    font-family: "Alegreya", serif;
+    /* font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal; */
+}
+main{
+    background-color:#FFF8E9 ;
+}
+.wrapper{
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+section{
+    padding:0 2% 100px 2%;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+img{
+    width: 100%;
+}
+.tit-box{
+    padding-bottom: 70px; 
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+.sec-tit{
+    color: #288fb5;
+    font-size: 48PX;
+    display:inline-block;
+}
+.sec-num{
+    position: absolute;
+    font-size: 30px;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#page-top{
+    width: 100%;
+    text-align: center;
+    background-color: #EDEDED;
+    height: 50px;
+    line-height: 50px;
+}
+#page-top a{
+    display: block;
+}
+
+
+/*========= ローディング画面のためのCSS ===============*/
+#splash {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: #333;
+	z-index: 9999999;
+	text-align:center;
+	color:#fff;
+}
+
+#splash-logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+/*========= 画面遷移のためのCSS ===============*/
+
+/*画面遷移アニメーション*/
+
+body{
+    background:#333;
+    /* 遷移アニメーションと同じ色を指定 */
+}
+
+body.appear{
+    background:#ffffff;/*画面を開いた後の背景色を指定*/
+}
+
+.splashbg{
+	position: fixed;
+	top: 0;
+	right:0;
+	bottom:0;
+	left: 0;
+	border-width: 0px;/*開始はボーダーの太さは0*/
+	border-style:solid;
+    border-color: #666;/*拡大する四角の色*/
+	animation-duration:.5s;
+	animation-fill-mode:forwards;
+}
+
+@keyframes backBoxAnime{
+	99.9% {/*アニメーション終了ぎりぎりまで*/
+        z-index: 2;/*最前面に*/
+		border-width: 0px;/*開始はボーダーの太さは0*/
+	}
+    100%{
+        z-index: -1; /*最背面に*/
+        border-width: 0px;/*終了はボーダーの太さは0*/
+    }
+}
+
+/*画面遷移の後現れるコンテンツ設定*/
+#container{
+    position: relative;
+	opacity: 0;/*はじめは透過0に*/
+}
+
+/*bodyにappearクラスがついたら出現*/
+body.appear #container{
+	animation-name:PageAnimeAppear;
+	animation-duration:1s;
+	animation-delay:0.2s;
+	animation-fill-mode:forwards;
+	opacity: 0;
+}
+
+@keyframes PageAnimeAppear{
+	0% {
+	opacity: 0;
+	}
+	100% {
+	opacity: 1;
+}
+}
+
+
+/* ヘッダー */
+header{
+    display: flex;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    background-color: rgba(250, 250, 250, 0.7);
+}
+.logo1 img{
+    width: 200px;
+}
+nav{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+nav a{
+    margin-right: 50px;
+    font-size: 24px;
+    color: #ffffff;
+    -webkit-text-stroke:2px black;
+}
+nav a:hover{
+    opacity: 0.7;
+}
+/*==================================================
+　5-2-7 3本線が奥行きを持って回転して×に
+===================================*/
+
+/*ボタン外側※レイアウトによってpositionや形状は適宜変更してください*/
+.openbtn{
+	/*ボタン内側の基点となるためrelativeを指定。
+追従するナビゲーションの場合はfixed＋top、rightといった位置をセットで指定*/
+    display: none;
+	position: relative;
+    position: fixed;
+    right: 0;
+	cursor: pointer;
+    width: 50px;
+    height:50px;
+	border-radius: 5px;
+}
+
+/*ボタン内側*/
+
+.openbtn .openbtn-area{
+    transition: all .4s;
+}
+
+.openbtn span{
+    display: inline-block;
+    transition: all .4s;/*アニメーションの設定*/
+    position: absolute;
+    left: 14px;
+    height: 3px;
+    border-radius: 2px;
+	background: #fff;
+    width: 45%;
+}
+
+
+.openbtn span:nth-of-type(1) {
+	top:15px;	
+}
+
+.openbtn span:nth-of-type(2) {
+	top:23px;
+}
+
+.openbtn span:nth-of-type(3) {
+	top:31px;
+}
+
+/*activeクラスが付与されると
+線と周りのエリアが回転して×になる*/
+
+.openbtn.active .openbtn-area{
+	transform: rotateY(-360deg);
+}
+
+.openbtn.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-135deg);
+    width: 30%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+	opacity: 0;
+}
+
+.openbtn.active span:nth-of-type(3){
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(135deg);
+    width: 30%;
+}
+#mask{
+    position: fixed;
+    left: 100%;
+}
+
+
+
+
+/* フッター */
+footer{
+    text-align: center;
+    font-size: 12px;
+    padding-bottom: 30px;
+    background-color:#FFF8E9 ;
+}
+
+/* トップページ */
+
+/* トップメインビジュアル */
+.mainvisual{
+    position: relative;
+    padding-top: 100px;
+    margin-bottom: 100px;
+}
+.mainvisual1{
+    height: calc(100vh - 100px);
+    object-fit: cover;
+}
+.mainvisual2{
+    max-width: 700px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+/* トップコンセプト */
+.concept{
+    padding: 0 0 100px 0;
+}
+.concept p:first-of-type{
+    font-size: 24px;
+    padding-bottom: 40px;
+}
+.concept p:last-child{
+    margin-bottom: 50px;
+}
+/* スライダー */
+.slider {/*横幅94%で左右に余白を持たせて中央寄せ*/
+    width:94%;
+    margin:0 auto;
+}
+
+.slider img {
+    width:60vw;/*スライダー内の画像を60vwにしてレスポンシブ化*/
+    height:auto;
+}
+
+.slider .slick-slide {
+    transform: scale(0.8);/*左右の画像のサイズを80%に*/
+    transition: all .5s;/*拡大や透過のアニメーションを0.5秒で行う*/
+    opacity: 0.5;/*透過50%*/
+}
+
+.slider .slick-slide.slick-center{
+    transform: scale(1);/*中央の画像のサイズだけ等倍に*/
+    opacity: 1;/*透過なし*/
+}
+
+
+/*矢印の設定*/
+
+/*戻る、次へ矢印の位置*/
+.slick-prev, 
+.slick-next {
+    position: absolute;/*絶対配置にする*/
+    top: 42%;
+    cursor: pointer;/*マウスカーソルを指マークに*/
+    outline: none;/*クリックをしたら出てくる枠線を消す*/
+    border-top: 2px solid #666;/*矢印の色*/
+    border-right: 2px solid #666;/*矢印の色*/
+    height: 15px;
+    width: 15px;
+}
+
+.slick-prev {/*戻る矢印の位置と形状*/
+    left: -1.5%;
+    transform: rotate(-135deg);
+}
+
+.slick-next {/*次へ矢印の位置と形状*/
+    right: -1.5%;
+    transform: rotate(45deg);
+}
+
+/*ドットナビゲーションの設定*/
+
+.slick-dots {
+    text-align:center;
+    margin:20px 0 0 0;
+}
+
+.slick-dots li {
+    display:inline-block;
+    margin:0 5px;
+}
+
+.slick-dots button {
+    color: transparent;
+    outline: none;
+    width:8px;/*ドットボタンのサイズ*/
+    height:8px;/*ドットボタンのサイズ*/
+    display:block;
+    border-radius:50%;
+    background:#ccc;/*ドットボタンの色*/
+}
+
+.slick-dots .slick-active button{
+    background:#333;/*ドットボタンの現在地表示の色*/
+}
+
+
+/* トップランチ */
+.lunch{
+    position: relative;
+}
+.lunch-img{
+    background-image: url(/img/omuraisu.webp);
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: 550px;
+}
+.content{
+    position: absolute;
+    top: 43%;
+    transform: translateY(-50%);
+    width:  40%;
+    height: 380px;
+    padding-top: 50px;
+    background-color: #EDEDED;
+}
+.content h2{
+    padding-bottom: 30px;
+}
+.content p{
+    padding: 0 20px 20px 20px;
+}
+/* 、トップカフェ */
+.cafe{
+    position: relative;
+}
+.cafe-img{
+    background-image: url(/img/coffee2.webp);
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: 550px;
+}
+.cafe .content{
+    position: absolute;
+    bottom: 50%;
+    right: 2%;
+    transform: translateY(-50%);
+    width:  40%;
+    height: 380px;
+    padding-top: 50px;
+    background-color: #EDEDED;
+}
+
+/* トップディナー */
+.dinner{
+    position: relative;
+}
+.dinner-img{
+    background-image: url(/img/steak.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 550px;
+}
+
+/* トップアクセス */
+.access .tit-box::before{
+    position: absolute;
+    content: "";
+    width: 40%;
+    height: 2px;
+    background-color: black;
+    top: 13px;
+    left: 10px;
+}
+.access .tit-box::after{
+    position: absolute;
+    content: "";
+    width: 40%;
+    height: 2px;
+    background-color: black;
+    top: 13px;
+    right: 10px;
+}
+.about{
+    text-align: center;
+    margin-bottom: 50px;
+}
+.about p{
+    margin-bottom: 30px;
+}
+.about img{
+    width: 300px;
+    margin: 0 auto 30px auto;
+}
+
+
+/* リンク共通 */
+.link-visual{
+    position: relative;
+    margin-bottom: 50px;
+}
+.link-visual img{
+    padding-top: 100px;
+    object-fit: cover;
+    width: 100%;
+    height: 700px;
+}
+.title h2{
+    position: absolute;
+    top: 50%;
+    left: 150px;
+    font-size: 48px;
+    color: #ffffff;
+    text-shadow: 3px 3px #333;
+}
+.text{
+    margin-bottom: 100px;
+}
+
+/* コンセプトページ */
+#concept .title p{
+    position: absolute;
+    top: 400px;
+    left: 250px;
+    color: #ffffff;
+    font-size: 24px;
+}
+#concept .text{
+    margin-bottom: 50px;
+}
+.slideshow{
+    margin-bottom: 100px;
+}
+.slideshow img{
+    margin: 0 auto;
+    width: 90%;
+    height: 200px;
+}
+.concept-item{
+    position: relative;
+    text-align: left;
+    padding-bottom: 100px;
+}
+.up p:nth-child(1){
+    font-size: 24px;
+    background-color: #FFF8E9;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 45%;
+    padding: 20px 2%;
+} 
+.up p:nth-child(2){
+    position: absolute;
+    top: 120px;
+    left: 0;
+    width: 35%;
+    padding: 0 2%;
+}
+.up img{
+    margin: 0 0 0 auto;
+    object-fit: cover;
+    width: 65%;
+    height: 300px;
+}
+.down p:nth-child(1){
+    font-size: 24px;
+    background-color: #FFF8E9;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    width: 45%;
+    padding: 20px 2%;
+} 
+.down p:nth-child(2){
+    position: absolute;
+    top: 120px;
+    right: 0;
+    width: 35%;
+    padding: 0 2%;
+}
+.down img{
+    object-fit: cover;
+    width: 65%;
+    height: 300px;
+}
+.up{
+    opacity: 0;
+}
+.down{
+    opacity: 0;
+}
+.slide-left {
+    animation: slide-left 0.5s ease-out 0s 1 forwards;
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(-50%);}
+    
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    }
+
+/*
+アニメーション（スライド右）を実行
+※左の処理と同様
+*/
+.slide-right {
+animation: slide-right 0.5s ease-out 0s 1 forwards;
+}
+
+@keyframes slide-right {
+0% {
+    transform: translateX(50%);}
+
+100% {
+    opacity: 1;
+    transform: translateX(0);
+}
+}
+
+/* ランチページ */
+#lunch .title p{
+    position: absolute;
+    top: 400px;
+    left: 240px;
+    color: #ffffff;
+    font-size: 24px;
+}
+.foodmenu{
+    text-align: center;
+}
+.menu-li{
+    max-width: 650px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 20px;
+}
+.menu-li dt{
+    width: 60%;
+    text-align: left;
+}
+.menu-li dd{
+    width: 40%;
+    text-align: right;
+}
+#lunch .tit-box::before{
+    position: absolute;
+    content: "";
+    width: 40%;
+    height: 2px;
+    background-color: black;
+    top: 13px;
+    left: 10px;
+}
+#lunch .tit-box::after{
+    position: absolute;
+    content: "";
+    width: 40%;
+    height: 2px;
+    background-color: black;
+    top: 13px;
+    right: 10px;
+}
+.menu-tit{
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+.menu-li{
+    margin-bottom: 30px;
+}
+.menu-img{
+    display: flex;
+    margin-bottom: 50px;
+}
+.menu-img li{
+    width: 100%;
+}
+.menu-img img{
+    object-fit: cover;
+    height: 250px;
+}
+
+/* #cafe */
+#cafe .title p{
+    position: absolute;
+    top: 400px;
+    left: 200px;
+    color: #ffffff;
+    font-size: 24px;
+}
+
+/* タブエリア */
+.tab{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.tab li{
+    width: calc(100% / 3);
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+.tab li a{
+    display: block;
+    background:#ddd;
+    margin:0 2px;
+    padding:10px 20px;
+}
+/*liにactiveクラスがついた時の形状*/
+.tab li.active a{
+    background:#fff;
+}
+
+
+/*エリアの表示非表示と形状*/
+.area {
+    display: none;/*はじめは非表示*/
+    opacity: 0;/*透過0*/
+    background: #fff;
+    padding:50px 20px;
+}
+/*areaにis-activeというクラスがついた時の形状*/
+.area.is-active {
+    display: block;/*表示*/
+    animation-name: displayAnime;/*ふわっと表示させるためのアニメーション*/
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes displayAnime{
+    from {
+    opacity: 0;
+    }
+    to {
+    opacity: 1;
+    }
+}
+.area h2{
+    font-size:1.3rem;
+    margin:0 0 20px 10px;
+}
+.area li{
+    padding: 10px; 
+    border-bottom: 1px solid #ddd;
+}
+
+#cafe .tit-box::before{
+    position: absolute;
+    content: "";
+    width: 40%;
+    height: 2px;
+    background-color: black;
+    top: 13px;
+    left: 10px;
+}
+#cafe .tit-box::after{
+    position: absolute;
+    content: "";
+    width: 40%;
+    height: 2px;
+    background-color: black;
+    top: 13px;
+    right: 10px;
+}
+
+
+/* ディナーページ */
+#dinner .title p{
+    position: absolute;
+    top: 400px;
+    left: 240px;
+    color: #ffffff;
+    font-size: 24px;
+}
+#dinner .tit-box::before{
+    position: absolute;
+    content: "";
+    width: 40%;
+    height: 2px;
+    background-color: black;
+    top: 13px;
+    left: 10px;
+}
+#dinner .tit-box::after{
+    position: absolute;
+    content: "";
+    width: 40%;
+    height: 2px;
+    background-color: black;
+    top: 13px;
+    right: 10px;
+}
+.dinner-cont{
+    display: flex;
+}
+.left{
+    width: 100%;
+}
+.right{
+    width: 100%;
+}
+.dinner-cont dl{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+.dinner-cont dt{
+    width: 80%;
+}
+.dinner-cont dd{
+    width: 20%;
+}
+
+/* アクセスページ */
+#access .title p{
+    position: absolute;
+    top: 400px;
+    left: 230px;
+    color: #ffffff;
+    font-size: 24px;
+}
+.conteiner{
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 24px;
+    padding-bottom: 50px;
+}
+.conteiner dt{
+    width: 40%;
+}
+.conteiner dd{
+    width: 60%;
+    margin-bottom: 30px;
+}
+
+
+/* レスポンスシブ */
+@media(max-width:887px){
+    .content h2{
+        padding-bottom: 0px;
+    }
+    .sec-tit{
+        font-size: 42PX;
+    }
+    .sec-num{
+        font-size: 24px;
+    }
+    .tit-kana{
+        font-size: 20px;
+    }
+    .access .tit-box::before{
+        width: 30%;
+    }
+    .access .tit-box::after {
+        width: 30%;
+    }
+}
+
+@media(max-width:730px){
+    header{
+        background-color: rgba(250, 250, 250, 0);
+    }
+    .openbtn{
+        display: block;
+        z-index: 10;
+    }
+    .open #mask{
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(51,51,51,0.9);
+
+    }
+    h1{
+        position: fixed;
+        left: -730px;
+    }
+    nav{
+        position: fixed;
+        left: -730px;
+    }
+    .open nav a{
+        -webkit-text-stroke:2px #ffffff;
+        width: 100%;
+        text-align: center;
+    }
+    .open nav{
+        transition: 0.5s;
+        position: fixed;
+        left: 20px;
+        top: 50px;
+        z-index: 15;
+        flex-direction: column;
+    }
+    .mainvisual{
+        padding-top: 0;
+    }
+    .mainvisual1{
+        height: 100vh;
+    }
+    section{
+        padding: 0 2% 50px 2%;
+    }
+    .sec-tit{
+        font-size: 42PX;
+    }
+    .sec-num{
+        font-size: 24px;
+    }
+    .tit-kana{
+        font-size: 20px;
+    }
+    .content{
+        position: static;
+        width: 100%;
+        margin-top: 200px;
+    }
+    .cafe .content{
+        position: static;
+        width: 100%;
+        margin-top: 200px;
+    }
+    .lunch-img{
+        background-attachment:scroll;
+        width: 100%;
+        height: 400px;
+    }
+    .cafe-img{
+        background-attachment:scroll;
+        background-position: bottom;
+        width: 100%;
+        height: 400px;
+    }
+    .dinner-img{
+        background-attachment:scroll;
+        width: 100%;
+        height: 400px;
+    }
+    .access .tit-box::before{
+        width: 30%;
+    }
+    .access .tit-box::after {
+        width: 30%;
+    }
+
+}
+
+@media(max-width:425px){
+    header{
+        background-color: rgba(250, 250, 250, 0);
+    }
+    .openbtn{
+        display: block;
+        z-index: 10;
+    }
+    .open #mask{
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #333;
+    }
+    h1{
+        position: fixed;
+        left: 425px;
+    }
+    nav{
+        position: fixed;
+        left: 425px;
+    }
+    .open nav a{
+        -webkit-text-stroke:2px #ffffff;
+        width: 100%;
+        text-align: center;
+    }
+    .open nav{
+        transition: 0.5s;
+        position: fixed;
+        left: 20px;
+        top: 50px;
+        z-index: 15;
+        flex-direction: column;
+    }
+    .mainvisual{
+        padding-top: 0;
+    }
+    .mainvisual1{
+        height: 100vh;
+    }
+    section{
+        padding: 0 2% 50px 2%;
+    }
+    .sec-tit{
+        font-size: 32PX;
+    }
+    .sec-num{
+        font-size: 24px;
+    }
+    .tit-kana{
+        font-size: 20px;
+    }
+    .content{
+        position: static;
+        width: 100%;
+        margin-top: 200px;
+    }
+    .cafe .content{
+        position: static;
+        width: 100%;
+        margin-top: 200px;
+    }
+    .lunch-img{
+        background-attachment:scroll;
+        width: 100%;
+        height: 200px;
+    }
+    .cafe-img{
+        background-attachment:scroll;
+        background-position: bottom;
+        width: 100%;
+        height: 200px;
+    }
+    .dinner-img{
+        background-attachment:scroll;
+        width: 100%;
+        height: 200px;
+    }
+    .access .tit-box::before{
+        width: 25%;
+    }
+    .access .tit-box::after {
+        width: 25%;
+    }
+}
